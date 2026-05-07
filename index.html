@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Enter DJ Huevo's room-based merch store. Shop the 6009 Collection through an immersive San Antonio mansion experience." />
+  <title>DJ Huevo - 6009 House</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="rooms" class="intro-active">
+  <div class="huevo-intro" id="huevo-intro" role="status" aria-live="polite" aria-label="Loading DJ Huevo 6009 House">
+    <div class="intro-confetti" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+    <div class="intro-egg">
+      <img src="images/dj-huevo-logo.svg" alt="DJ Huevo egg logo" />
+      <span></span>
+    </div>
+    <div class="intro-copy">
+      <p>6009 signal warming up</p>
+      <b>DJ Huevo</b>
+      <small>Cracking the room open...</small>
+    </div>
+  </div>
+  <header class="house-nav" aria-label="Store navigation">
+    <nav class="house-nav-left" aria-label="Primary">
+      <a href="#map">Rooms</a>
+      <button type="button" data-open-shop>Shop All</button>
+      <a href="booking.html">Book</a>
+      <a href="archive.html">Archive</a>
+    </nav>
+    <a class="house-brand" href="#map" aria-label="DJ Huevo 6009 House home">
+      <img src="images/dj-huevo-logo.svg" alt="" />
+      <span>DJ Huevo</span>
+    </a>
+    <button class="cart-link" type="button" data-open-shop>Cart ( <span data-cart-count>0</span> )</button>
+  </header>
+
+  <main class="house-shell" id="mainContent">
+    <section class="house-view map-view is-active" id="map" data-view="map" aria-label="6009 House property map">
+      <div class="map-atmosphere" aria-hidden="true"></div>
+      <div class="map-sigil" aria-hidden="true">
+        <img src="images/dj-huevo-logo.svg" alt="" />
+        <span>Huevo</span>
+        <small>6009 / SA</small>
+      </div>
+      <div class="map-title">
+        <p>DJ Huevo presents</p>
+        <h1>6009<br>House</h1>
+        <span>San Antonio after-hours merch house. Album energy, stacked fits, and room-by-room drops.</span>
+      </div>
+      <div class="map-coordinate" aria-hidden="true">
+        <span>29.4241 N</span>
+        <span>98.4936 W</span>
+        <span>Tu Padre signal live</span>
+        <span>Vamonos de Aqui / Jun 2</span>
+      </div>
+      <div class="map-drop-note">
+        <b>6009 Collection</b>
+        <span>Hoodies + stacked pants / $60 each</span>
+      </div>
+      <aside class="map-music-panel" id="map-music-panel" aria-label="DJ Huevo music links"></aside>
+      <a class="map-booking-panel" id="map-booking-panel" href="booking.html" aria-label="Book DJ Huevo">
+        <span>Bookings</span>
+        <b>Book DJ Huevo</b>
+        <small>$100/hr minimum</small>
+      </a>
+      <div class="property-map" id="property-map" aria-label="Clickable mansion room map"></div>
+      <div class="map-legend" aria-label="Room color legend">
+        <span><i class="legend-green"></i> Fit Room</span>
+        <span><i class="legend-purple"></i> Afterhours</span>
+        <span><i class="legend-yellow"></i> Booth</span>
+        <span><i class="legend-red"></i> La Sala</span>
+        <span><i class="legend-warm"></i> Late Plate</span>
+      </div>
+      <div class="map-room-list" id="map-room-list" aria-label="Room shortcuts"></div>
+    </section>
+
+    <div id="room-views"></div>
+  </main>
+
+  <a class="archive-jump" href="archive.html" aria-label="Open original index archive">Original Index</a>
+  <button class="explore-link" type="button" data-enter-room="map">Explore</button>
+  <button class="house-mark" type="button" data-enter-room="map" aria-label="Return to 6009 House map">6009</button>
+  <audio id="bg-audio" preload="metadata"></audio>
+
+  <div class="drawer-overlay" id="drawer-overlay" hidden></div>
+  <aside class="shop-drawer" id="shop-drawer" aria-labelledby="drawer-title" aria-hidden="true">
+    <div class="drawer-header">
+      <h2 class="drawer-title" id="drawer-title">The <span>6009</span> Collection</h2>
+      <button class="drawer-close" id="drawer-close" type="button" aria-label="Close shop drawer">&times;</button>
+    </div>
+    <div class="shopify-buy-wrap">
+      <div id="collection-component-1778036588622"></div>
+    </div>
+  </aside>
+
+  <script src="https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js"></script>
+  <script src="store-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

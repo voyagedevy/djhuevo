@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The archived original DJ Huevo storefront: a vertical-stack version of the 6009 Collection site." />
+  <title>DJ Huevo - Original Index Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="archive">
+  <header class="archive-nav" aria-label="Archive navigation">
+    <a class="archive-logo" href="index.html#map">
+      <img src="images/dj-huevo-logo.svg" alt="" />
+      <span>DJ Huevo</span>
+    </a>
+    <nav>
+      <a href="index.html#map">Rooms</a>
+      <button type="button" data-open-shop>Shop All</button>
+      <a href="booking.html">Book</a>
+      <a href="#collection">Collection</a>
+    </nav>
+    <button class="cart-link archive-cart" type="button" data-open-shop>Cart ( <span data-cart-count>0</span> )</button>
+  </header>
+
+  <main class="archive-page" id="archive-root">
+    <section class="archive-hero">
+      <div class="archive-hero-bg" aria-hidden="true"></div>
+      <div class="archive-hero-copy">
+        <p>Original Index / Preserved Build</p>
+        <h1>DJ Huevo</h1>
+        <span>San Antonio merch, music, and booking in the first vertical flow.</span>
+        <div class="archive-actions">
+          <button type="button" data-open-shop>Shop Collection</button>
+          <a href="index.html#closet">Enter Rooms</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="archive-section archive-music" id="music">
+      <div>
+        <p class="archive-kicker">Music</p>
+        <h2>Vamonos de Aqui</h2>
+        <span>Album drop June 2, 2026</span>
+        <div class="archive-streaming" id="archive-streaming" aria-label="Streaming service links"></div>
+      </div>
+      <img src="images/album-cover.jpg" alt="Vamonos de Aqui album art" />
+    </section>
+
+    <section class="archive-section" id="collection">
+      <div class="archive-section-head">
+        <p class="archive-kicker">6009 Collection</p>
+        <h2>The original product stack</h2>
+        <button type="button" data-open-shop>Open Full Shop</button>
+      </div>
+      <div class="archive-products" id="archive-products"></div>
+    </section>
+
+    <section class="archive-section archive-booking" id="booking">
+      <div>
+        <p class="archive-kicker">Bookings</p>
+        <h2>Book Huevo</h2>
+        <span>$100/hr minimum - all gear included</span>
+      </div>
+      <form class="archive-form" id="booking-form">
+        <input type="text" name="name" placeholder="Name" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="date" name="event-date" required />
+        <input type="text" name="event-type" placeholder="Event type" required />
+        <input type="text" name="venue" placeholder="Venue / address" required />
+        <input type="text" name="budget" placeholder="Budget" required />
+        <textarea name="notes" placeholder="Notes" rows="4"></textarea>
+        <button type="submit">Send Request</button>
+        <p id="form-success" hidden>Request ready in your email app.</p>
+      </form>
+    </section>
+  </main>
+
+  <a class="rooms-jump" href="index.html#map" aria-label="Return to immersive room experience">Enter 6009 House</a>
+
+  <div class="drawer-overlay" id="drawer-overlay" hidden></div>
+  <aside class="shop-drawer" id="shop-drawer" aria-labelledby="drawer-title" aria-hidden="true">
+    <div class="drawer-header">
+      <h2 class="drawer-title" id="drawer-title">The <span>6009</span> Collection</h2>
+      <button class="drawer-close" id="drawer-close" type="button" aria-label="Close shop drawer">&times;</button>
+    </div>
+    <div class="shopify-buy-wrap">
+      <div id="collection-component-1778036588622"></div>
+    </div>
+  </aside>
+
+  <script src="https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js"></script>
+  <script src="store-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DJ Huevo — Launch Plan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:      #080808;
+      --s1:      #111111;
+      --s2:      #1a1a1a;
+      --purple:  #9B30FF;
+      --green:   #39FF14;
+      --yellow:  #FFE135;
+      --white:   #F5F5F5;
+      --muted:   #666;
+      --border:  rgba(255,255,255,0.07);
+      --fd: 'Archivo Black', sans-serif;
+      --fh: 'Oswald', sans-serif;
+      --fb: 'Inter', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--white); font-family: var(--fb); min-height: 100vh; }
+
+    /* HEADER */
+    .header {
+      padding: 2.5rem 3rem 2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .header-left h1 {
+      font-family: var(--fd); font-size: 2.5rem; line-height: 1;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .header-left p {
+      font-family: var(--fh); font-size: 0.75rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--muted); margin-top: 0.4rem;
+    }
+    .header-right { text-align: right; }
+    .date-badge {
+      font-family: var(--fh); font-size: 0.7rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--yellow);
+      border: 1px solid rgba(255,225,53,0.3); padding: 0.35rem 1rem;
+      border-radius: 3px; display: inline-block; margin-bottom: 0.5rem;
+    }
+
+    /* OVERALL PROGRESS */
+    .progress-wrap {
+      padding: 1.5rem 3rem;
+      background: var(--s1);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+    }
+    .progress-label {
+      font-family: var(--fh); font-size: 0.75rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted); white-space: nowrap;
+    }
+    .progress-bar-wrap { flex: 1; min-width: 200px; }
+    .progress-bar {
+      height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      border-radius: 3px; transition: width 0.4s ease;
+    }
+    .progress-pct {
+      font-family: var(--fd); font-size: 1.5rem;
+      background: linear-gradient(90deg, var(--purple), var(--green));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      white-space: nowrap;
+    }
+    .progress-count {
+      font-family: var(--fh); font-size: 0.7rem; letter-spacing: 0.1em;
+      color: var(--muted); margin-top: 0.3rem;
+    }
+
+    /* MAIN LAYOUT */
+    .main { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+
+    /* SECTION */
+    .section {
+      padding: 2rem 3rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .section:nth-child(even) { border-right: none; }
+
+    .section-title {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .section-icon {
+      width: 32px; height: 32px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; flex-shrink: 0;
+    }
+    .icon-purple { background: rgba(155,48,255,0.15); border: 1px solid rgba(155,48,255,0.3); }
+    .icon-green  { background: rgba(57,255,20,0.1);  border: 1px solid rgba(57,255,20,0.25); }
+    .icon-yellow { background: rgba(255,225,53,0.1); border: 1px solid rgba(255,225,53,0.25); }
+    .icon-white  { background: rgba(255,255,255,0.05); border: 1px solid var(--border); }
+
+    .section-title h2 {
+      font-family: var(--fh); font-size: 0.8rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--white);
+    }
+    .section-title .section-badge {
+      margin-left: auto;
+      font-family: var(--fh); font-size: 0.6rem; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+    }
+    .badge-done   { background: rgba(57,255,20,0.1);  color: var(--green);  border: 1px solid rgba(57,255,20,0.2); }
+    .badge-urgent { background: rgba(255,225,53,0.1); color: var(--yellow); border: 1px solid rgba(255,225,53,0.2); }
+    .badge-open   { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid var(--border); }
+
+    /* ITEMS */
+    .item {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      cursor: pointer;
+      transition: background 0.15s;
+      border-radius: 4px;
+      padding-left: 0.25rem;
+    }
+    .item:last-child { border-bottom: none; }
+    .item:hover { background: rgba(255,255,255,0.02); }
+
+    .check {
+      width: 18px; height: 18px; border-radius: 4px;
+      border: 1.5px solid var(--border); flex-shrink: 0;
+      margin-top: 1px; display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; font-size: 0.65rem; color: transparent;
+    }
+    .item.done .check {
+      background: var(--green); border-color: var(--green); color: var(--bg);
+    }
+    .item.done .item-text { color: var(--muted); text-decoration: line-through; }
+
+    .item-body { flex: 1; min-width: 0; }
+    .item-text {
+      font-size: 0.85rem; color: var(--white); line-height: 1.4;
+      transition: color 0.2s;
+    }
+    .item-sub {
+      font-size: 0.7rem; color: var(--muted); margin-top: 0.15rem;
+    }
+
+    .tag {
+      font-family: var(--fh); font-size: 0.55rem; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 0.15rem 0.45rem;
+      border-radius: 2px; white-space: nowrap; flex-shrink: 0; margin-top: 2px;
+    }
+    .tag-purple { background: rgba(155,48,255,0.15); color: var(--purple); }
+    .tag-green  { background: rgba(57,255,20,0.1);  color: var(--green); }
+    .tag-yellow { background: rgba(255,225,53,0.1); color: var(--yellow); }
+    .tag-red    { background: rgba(255,60,60,0.15); color: #ff6060; }
+
+    /* TIMELINE STRIP */
+    .timeline {
+      grid-column: 1 / -1;
+      padding: 1.5rem 3rem;
+      background: var(--s1);
+      border-bottom: 1px solid var(--border);
+      display: flex; gap: 0; overflow-x: auto;
+    }
+    .tl-item {
+      flex: 1; min-width: 120px; position: relative;
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+    }
+    .tl-item::before {
+      content: ''; position: absolute; top: 10px; left: 50%; right: -50%;
+      height: 1px; background: var(--border); z-index: 0;
+    }
+    .tl-item:last-child::before { display: none; }
+    .tl-dot {
+      width: 20px; height: 20px; border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--bg); z-index: 1; position: relative;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.55rem;
+    }
+    .tl-dot.active { border-color: var(--green); background: rgba(57,255,20,0.1); }
+    .tl-dot.upcoming { border-color: var(--yellow); }
+    .tl-dot.milestone { border-color: var(--purple); }
+    .tl-date { font-family: var(--fh); font-size: 0.65rem; letter-spacing: 0.1em; color: var(--muted); text-align: center; }
+    .tl-label { font-size: 0.7rem; color: var(--white); text-align: center; line-height: 1.3; }
+    .tl-item.active .tl-date { color: var(--green); }
+    .tl-item.active .tl-label { color: var(--green); }
+    .tl-item.milestone .tl-date { color: var(--purple); }
+    .tl-item.milestone .tl-label { color: var(--purple); }
+
+    /* NOTES SECTION */
+    .notes-section {
+      grid-column: 1 / -1;
+      padding: 2rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .notes-section h3 {
+      font-family: var(--fh); font-size: 0.75rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--yellow); margin-bottom: 1rem;
+    }
+    .strategy-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+    }
+    .strategy-card {
+      background: var(--s2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1rem;
+    }
+    .strategy-card .sc-icon { font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .strategy-card .sc-title {
+      font-family: var(--fh); font-size: 0.75rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--white); margin-bottom: 0.4rem;
+    }
+    .strategy-card .sc-goal {
+      font-size: 0.7rem; color: var(--muted); line-height: 1.5;
+    }
+    .strategy-card .sc-kpi {
+      font-family: var(--fd); font-size: 1rem; color: var(--purple);
+      margin-top: 0.5rem;
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: 1.5rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-note { font-size: 0.7rem; color: var(--muted); }
+    .reset-btn {
+      font-family: var(--fh); font-size: 0.65rem; letter-spacing: 0.15em;
+      text-transform: uppercase; padding: 0.4rem 1rem;
+      border: 1px solid var(--border); background: transparent;
+      color: var(--muted); border-radius: 3px; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .reset-btn:hover { border-color: var(--white); color: var(--white); }
+
+    @media (max-width: 768px) {
+      .main { grid-template-columns: 1fr; }
+      .section { border-right: none; }
+      .strategy-grid { grid-template-columns: repeat(2, 1fr); }
+      .header, .progress-wrap, .timeline, .notes-section, .footer { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .section { padding: 1.5rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <h1>DJ HUEVO</h1>
+      <p>Launch Plan · May 5 – June 2, 2026</p>
+    </div>
+    <div class="header-right">
+      <div class="date-badge">Meeting Today · May 5</div>
+      <div style="font-family:var(--fh);font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)">Shoot May 7 · Go Live May 9 · Album Jun 2</div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline">
+    <div class="tl-item active">
+      <div class="tl-dot active">●</div>
+      <div class="tl-date">May 5</div>
+      <div class="tl-label">Kickoff<br/>Meeting</div>
+    </div>
+    <div class="tl-item upcoming">
+      <div class="tl-dot upcoming"></div>
+      <div class="tl-date">May 7</div>
+      <div class="tl-label">Content<br/>Shoot</div>
+    </div>
+    <div class="tl-item upcoming">
+      <div class="tl-dot upcoming"></div>
+      <div class="tl-date">May 9</div>
+      <div class="tl-label">Site<br/>Goes Live</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">May 9+</div>
+      <div class="tl-label">Shopify<br/>Store Live</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">May 15</div>
+      <div class="tl-label">Singles<br/>Campaign</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">May 25</div>
+      <div class="tl-label">Pre-Save<br/>Push</div>
+    </div>
+    <div class="tl-item milestone">
+      <div class="tl-dot milestone">★</div>
+      <div class="tl-date">Jun 2</div>
+      <div class="tl-label">Album<br/>Drop</div>
+    </div>
+  </div>
+
+  <!-- OVERALL PROGRESS -->
+  <div class="progress-wrap">
+    <div class="progress-label">Overall Progress</div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
+      <div class="progress-count" id="prog-count">0 of 0 tasks complete</div>
+    </div>
+    <div class="progress-pct" id="prog-pct">0%</div>
+  </div>
+
+  <!-- CHECKLIST GRID -->
+  <div class="main">
+
+    <!-- WEBSITE -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-icon icon-purple">🌐</div>
+        <h2>Website</h2>
+        <span class="section-badge badge-urgent">Due May 9</span>
+      </div>
+
+      <div class="item done" onclick="toggle(this)">
+        <div class="check">✓</div>
+        <div class="item-body">
+          <div class="item-text">Site structure built (HTML/CSS/JS)</div>
+        </div>
+        <span class="tag tag-green">Done</span>
+      </div>
+      <div class="item done" onclick="toggle(this)">
+        <div class="check">✓</div>
+        <div class="item-body">
+          <div class="item-text">Hero section — Cybertruck photo live</div>
+        </div>
+        <span class="tag tag-green">Done</span>
+      </div>
+      <div class="item done" onclick="toggle(this)">
+        <div class="check">✓</div>
+        <div class="item-body">
+          <div class="item-text">Album countdown — June 2</div>
+        </div>
+        <span class="tag tag-green">Done</span>
+      </div>
+      <div class="item done" onclick="toggle(this)">
+        <div class="check">✓</div>
+        <div class="item-body">
+          <div class="item-text">Background player — Tu Padre wired</div>
+        </div>
+        <span class="tag tag-green">Done</span>
+      </div>
+      <div class="item done" onclick="toggle(this)">
+        <div class="check">✓</div>
+        <div class="item-body">
+          <div class="item-text">Music section — album cover + Spotify embed</div>
+        </div>
+        <span class="tag tag-green">Done</span>
+      </div>
+      <div class="item done" onclick="toggle(this)">
+        <div class="check">✓</div>
+        <div class="item-body">
+          <div class="item-text">6009 Collection drop teaser (all 6 items)</div>
+        </div>
+        <span class="tag tag-green">Done</span>
+      </div>
+      <div class="item done" onclick="toggle(this)">
+        <div class="check">✓</div>
+        <div class="item-body">
+          <div class="item-text">Full merch catalog grid — 20 products, tabbed</div>
+        </div>
+        <span class="tag tag-green">Done</span>
+      </div>
+      <div class="item done" onclick="toggle(this)">
+        <div class="check">✓</div>
+        <div class="item-body">
+          <div class="item-text">Booking form (date, venue, type, budget)</div>
+        </div>
+        <span class="tag tag-green">Done</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Replace egg emoji with mascot image</div>
+          <div class="item-sub">Need the actual egg character file</div>
+        </div>
+        <span class="tag tag-yellow">Needed</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Add more background tracks to player</div>
+          <div class="item-sub">He's sending more songs</div>
+        </div>
+        <span class="tag tag-yellow">Pending</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Confirm booking email address</div>
+          <div class="item-sub">booking@djhuevo.com or personal?</div>
+        </div>
+        <span class="tag tag-yellow">Needed</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Connect djhuevo.com domain → Netlify/Vercel</div>
+          <div class="item-sub">DNS setup — needs domain access</div>
+        </div>
+        <span class="tag tag-red">Blocking</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Drop in shoot photos after May 7</div>
+          <div class="item-sub">Hero, studio, lifestyle shots</div>
+        </div>
+        <span class="tag tag-purple">May 7</span>
+      </div>
+    </div>
+
+    <!-- SHOOT -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-icon icon-yellow">📷</div>
+        <h2>Content Shoot — May 7</h2>
+        <span class="section-badge badge-urgent">2 Days</span>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Hero portrait shot — dark/moody lighting</div>
+          <div class="item-sub">For site hero and socials</div>
+        </div>
+        <span class="tag tag-purple">R6 III</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Wide condo/room shots for room-based layout</div>
+          <div class="item-sub">Living room, studio corner, vibe spaces</div>
+        </div>
+        <span class="tag tag-purple">R6 III</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">6009 hoodie shots — all 3 colorways on body</div>
+          <div class="item-sub">Black, Pink, White</div>
+        </div>
+        <span class="tag tag-purple">R6 III</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">6009 pants shots — stacked on body</div>
+          <div class="item-sub">All 3 colorways</div>
+        </div>
+        <span class="tag tag-purple">R6 III</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">DJ setup / controller shots</div>
+          <div class="item-sub">Studio identity, music room background</div>
+        </div>
+        <span class="tag tag-purple">R6 III</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Video content — 6009 lookbook clip</div>
+          <div class="item-sub">For the video teaser section on site</div>
+        </div>
+        <span class="tag tag-purple">R6 III</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Short Reels clips — lifestyle / behind the scenes</div>
+          <div class="item-sub">Instagram rollout content</div>
+        </div>
+        <span class="tag tag-purple">R6 III</span>
+      </div>
+    </div>
+
+    <!-- SHOPIFY -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-icon icon-green">🛒</div>
+        <h2>Shopify Store</h2>
+        <span class="section-badge badge-open">In Progress</span>
+      </div>
+
+      <div class="item done" onclick="toggle(this)">
+        <div class="check">✓</div>
+        <div class="item-body">
+          <div class="item-text">Full product CSV ready — 29 products</div>
+          <div class="item-sub">Mugs, tees, totes + 6009 Collection</div>
+        </div>
+        <span class="tag tag-green">Done</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Create Shopify account</div>
+          <div class="item-sub">shopify.com — 2 min setup</div>
+        </div>
+        <span class="tag tag-red">Blocking</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Import product CSV → instant catalog</div>
+        </div>
+        <span class="tag tag-yellow">Next</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Set 6009 Collection pricing</div>
+          <div class="item-sub">Hoodies + pants — price TBD</div>
+        </div>
+        <span class="tag tag-yellow">Needed</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Connect Printful for POD items</div>
+          <div class="item-sub">Mugs, tees, totes auto-fulfilled</div>
+        </div>
+        <span class="tag tag-yellow">Next</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Upload product photos to Shopify</div>
+          <div class="item-sub">6009 Collection photos ready to upload</div>
+        </div>
+        <span class="tag tag-yellow">Next</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Embed Shopify Buy Button on website</div>
+          <div class="item-sub">Replaces current "Shop Now" placeholder</div>
+        </div>
+        <span class="tag tag-yellow">Next</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Connect shop.djhuevo.com subdomain</div>
+        </div>
+        <span class="tag tag-yellow">Last</span>
+      </div>
+    </div>
+
+    <!-- MUSIC & RELEASE -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-icon icon-purple">🎵</div>
+        <h2>Music & Release</h2>
+        <span class="section-badge badge-urgent">Jun 2 Drop</span>
+      </div>
+
+      <div class="item done" onclick="toggle(this)">
+        <div class="check">✓</div>
+        <div class="item-body">
+          <div class="item-text">Album cover — Vámonos de Aquí</div>
+          <div class="item-sub">Live on site music section</div>
+        </div>
+        <span class="tag tag-green">Done</span>
+      </div>
+      <div class="item done" onclick="toggle(this)">
+        <div class="check">✓</div>
+        <div class="item-body">
+          <div class="item-text">Spotify, Apple Music, YouTube Music linked</div>
+        </div>
+        <span class="tag tag-green">Done</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Pre-save link live before Jun 2</div>
+          <div class="item-sub">DistroKid or feature.fm</div>
+        </div>
+        <span class="tag tag-yellow">Needed</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Drop 2–3 singles before album</div>
+          <div class="item-sub">Build momentum leading to Jun 2</div>
+        </div>
+        <span class="tag tag-yellow">Strategy</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">More background tracks for site player</div>
+          <div class="item-sub">He's sending — drop into audio/ folder</div>
+        </div>
+        <span class="tag tag-yellow">Pending</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Playlist pitching — Spotify editorial</div>
+          <div class="item-sub">Submit via DistroKid at least 7 days early</div>
+        </div>
+        <span class="tag tag-purple">May 26</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Target 10K–50K streams in first 30 days</div>
+        </div>
+        <span class="tag tag-purple">KPI</span>
+      </div>
+    </div>
+
+    <!-- SOCIAL & MARKETING -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-icon icon-green">📲</div>
+        <h2>Social & Marketing</h2>
+        <span class="section-badge badge-open">Ongoing</span>
+      </div>
+
+      <div class="item done" onclick="toggle(this)">
+        <div class="check">✓</div>
+        <div class="item-body">
+          <div class="item-text">Instagram @djhuevot linked on site</div>
+        </div>
+        <span class="tag tag-green">Done</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">IG bio updated — link to djhuevo.com</div>
+        </div>
+        <span class="tag tag-yellow">Quick Win</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Post content from May 7 shoot within 24hrs</div>
+          <div class="item-sub">Reels, carousels, stories</div>
+        </div>
+        <span class="tag tag-purple">May 8</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Consistent post cadence — daily or every other day</div>
+          <div class="item-sub">Snippets, lifestyle, merch, countdown</div>
+        </div>
+        <span class="tag tag-yellow">Ongoing</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Email / SMS list setup</div>
+          <div class="item-sub">Mailchimp or Klaviyo — underrated growth tool</div>
+        </div>
+        <span class="tag tag-yellow">Strategy</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Run first paid ad campaign</div>
+          <div class="item-sub">Even $50–$100 budget, target IG/Meta</div>
+        </div>
+        <span class="tag tag-yellow">Strategy</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Target: 10K Instagram followers</div>
+        </div>
+        <span class="tag tag-purple">KPI</span>
+      </div>
+    </div>
+
+    <!-- NEEDS FROM HIM -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-icon icon-yellow">⚡</div>
+        <h2>Needs From David</h2>
+        <span class="section-badge badge-urgent">Today</span>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">DistroKid login credentials</div>
+          <div class="item-sub">For Printful product migration</div>
+        </div>
+        <span class="tag tag-red">Blocking</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Domain registrar access — djhuevo.com</div>
+          <div class="item-sub">To point DNS at hosting</div>
+        </div>
+        <span class="tag tag-red">Blocking</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Create Shopify account</div>
+          <div class="item-sub">shopify.com — can do together right now</div>
+        </div>
+        <span class="tag tag-red">Blocking</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">6009 Collection pricing</div>
+          <div class="item-sub">Hoodies + 3 pants colorways</div>
+        </div>
+        <span class="tag tag-yellow">Needed</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Booking email address confirmed</div>
+        </div>
+        <span class="tag tag-yellow">Needed</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Mascot / egg character image file</div>
+          <div class="item-sub">For hero section on site</div>
+        </div>
+        <span class="tag tag-yellow">Needed</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Additional background tracks</div>
+          <div class="item-sub">Drop into ~/Desktop/djhuevo/audio/</div>
+        </div>
+        <span class="tag tag-yellow">Needed</span>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="check"></div>
+        <div class="item-body">
+          <div class="item-text">Singles release plan before Jun 2</div>
+          <div class="item-sub">Which tracks, which dates</div>
+        </div>
+        <span class="tag tag-yellow">Strategy</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- STRATEGY SNAPSHOT -->
+  <div class="notes-section">
+    <h3>30-Day Objectives · Vámonos de Aquí Rollout</h3>
+    <div class="strategy-grid">
+      <div class="strategy-card">
+        <div class="sc-icon">🎵</div>
+        <div class="sc-title">Music</div>
+        <div class="sc-goal">Drop 2–3 singles before Jun 2. Submit to Spotify editorial 7 days early. Push for playlist placement.</div>
+        <div class="sc-kpi">10K–50K streams</div>
+      </div>
+      <div class="strategy-card">
+        <div class="sc-icon">📲</div>
+        <div class="sc-title">Audience</div>
+        <div class="sc-goal">Daily content from shoot. IG Reels, snippets, lifestyle. Email list capture via site.</div>
+        <div class="sc-kpi">10K followers</div>
+      </div>
+      <div class="strategy-card">
+        <div class="sc-icon">💰</div>
+        <div class="sc-title">Revenue</div>
+        <div class="sc-goal">Shopify store live. 6009 Collection drop tied to album. Booking through site only.</div>
+        <div class="sc-kpi">First 50 orders</div>
+      </div>
+      <div class="strategy-card">
+        <div class="sc-icon">🎤</div>
+        <div class="sc-title">Presence</div>
+        <div class="sc-goal">3–5 live shows. Network with local promoters. Stage identity matches brand.</div>
+        <div class="sc-kpi">3–5 shows</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-note">Built by BTA · djhuevo.com · Check items off as we go</div>
+    <button class="reset-btn" onclick="resetAll()">Reset Checklist</button>
+  </div>
+
+  <script>
+    function toggle(el) {
+      el.classList.toggle('done');
+      updateProgress();
+      saveState();
+    }
+
+    function updateProgress() {
+      const all   = document.querySelectorAll('.item');
+      const done  = document.querySelectorAll('.item.done');
+      const pct   = all.length ? Math.round((done.length / all.length) * 100) : 0;
+      document.getElementById('prog-fill').style.width  = pct + '%';
+      document.getElementById('prog-pct').textContent   = pct + '%';
+      document.getElementById('prog-count').textContent = done.length + ' of ' + all.length + ' tasks complete';
+    }
+
+    function saveState() {
+      const items = document.querySelectorAll('.item');
+      const state = Array.from(items).map(function(el) { return el.classList.contains('done'); });
+      try { localStorage.setItem('djhuevo-checklist', JSON.stringify(state)); } catch(e) {}
+    }
+
+    function loadState() {
+      try {
+        const state = JSON.parse(localStorage.getItem('djhuevo-checklist') || '[]');
+        const items = document.querySelectorAll('.item');
+        items.forEach(function(el, i) {
+          if (state[i]) el.classList.add('done');
+        });
+      } catch(e) {}
+      updateProgress();
+    }
+
+    function resetAll() {
+      if (!confirm('Reset all checkboxes?')) return;
+      document.querySelectorAll('.item').forEach(function(el) { el.classList.remove('done'); });
+      try { localStorage.removeItem('djhuevo-checklist'); } catch(e) {}
+      updateProgress();
+    }
+
+    loadState();
+  </script>
+</body>
+</html>

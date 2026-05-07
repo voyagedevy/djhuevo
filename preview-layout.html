@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DJ Huevo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --purple: #9B30FF;
+      --green:  #39FF14;
+      --yellow: #FFE135;
+      --bg:     #080808;
+      --white:  #F5F5F5;
+      --muted:  #777;
+      --font-display: 'Archivo Black', sans-serif;
+      --font-heading: 'Oswald', sans-serif;
+      --font-body:    'Inter', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+    body { background: var(--bg); color: var(--white); font-family: var(--font-body); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 2.5rem;
+      background: linear-gradient(to bottom, rgba(8,8,8,0.7) 0%, transparent 100%);
+    }
+    .nav-logo {
+      font-family: var(--font-display); font-size: 1.1rem; letter-spacing: 0.1em;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--font-heading); font-size: 0.75rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(255,255,255,0.55); transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      font-family: var(--font-heading); font-size: 0.7rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--yellow);
+      border: 1px solid rgba(255,225,53,0.4); padding: 0.5rem 1.25rem; border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .nav-cta:hover { background: rgba(255,225,53,0.1); border-color: var(--yellow); }
+
+    /* ── ROOMS ── */
+    .room {
+      position: relative; width: 100%; height: 100vh;
+      display: flex; align-items: flex-end;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+    .room-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      transition: transform 10s ease;
+    }
+    .room:hover .room-bg { transform: scale(1.03); }
+
+    .room-1 .room-bg {
+      background-image:
+        linear-gradient(160deg, rgba(155,48,255,0.15) 0%, transparent 40%),
+        linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.72) 100%),
+        url('images/room-1-bg.png');
+      background-size: cover; background-position: center;
+    }
+    .room-2 .room-bg {
+      background-image:
+        linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.78) 100%),
+        url('images/room-2-bg.png');
+      background-size: cover; background-position: center;
+    }
+    .room-3 .room-bg {
+      background-image:
+        linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.82) 100%),
+        url('images/room-3-bg.png');
+      background-size: cover; background-position: center;
+    }
+    .room-4 .room-bg {
+      background-image:
+        linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.88) 100%),
+        url('images/room-4-bg.png');
+      background-size: cover; background-position: center;
+    }
+
+    /* ── ROOM CONTENT ── */
+    .room-content {
+      position: relative; z-index: 2;
+      padding: 0 4rem 4rem; width: 100%;
+    }
+    .room-eyebrow {
+      font-family: var(--font-heading); font-size: 0.7rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem;
+    }
+    .room-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      line-height: 0.92; letter-spacing: -0.01em; margin-bottom: 1.5rem;
+    }
+    .accent-purple { color: var(--purple); }
+    .accent-green  { color: var(--green); }
+    .accent-yellow { color: var(--yellow); }
+
+    /* ── CTA BUTTONS ── */
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      font-family: var(--font-heading); font-size: 0.78rem; letter-spacing: 0.18em;
+      text-transform: uppercase; padding: 0.8rem 1.75rem; border-radius: 2px;
+      cursor: pointer; border: 1px solid; transition: all 0.25s; background: none;
+    }
+    .cta-btn .arrow { transition: transform 0.2s; font-size: 0.7rem; }
+    .cta-btn:hover .arrow { transform: translateX(4px); }
+    .cta-white  { color: var(--white);  border-color: rgba(255,255,255,0.3); }
+    .cta-white:hover  { border-color: var(--white); background: rgba(255,255,255,0.05); }
+    .cta-green  { color: var(--green);  border-color: rgba(57,255,20,0.4); }
+    .cta-green:hover  { background: rgba(57,255,20,0.08); border-color: var(--green); }
+    .cta-yellow { color: var(--yellow); border-color: rgba(255,225,53,0.4); }
+    .cta-yellow:hover { background: rgba(255,225,53,0.08); border-color: var(--yellow); }
+    .cta-purple { color: var(--purple); border-color: rgba(155,48,255,0.4); }
+    .cta-purple:hover { background: rgba(155,48,255,0.1); border-color: var(--purple); }
+
+    /* ── HERO ELEMENTS ── */
+    .hero-tags { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .hero-tag { font-family: var(--font-heading); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; }
+    .hero-divider { width: 36px; height: 1px; background: rgba(255,255,255,0.2); }
+    .countdown-row { display: flex; gap: 1.5rem; align-items: baseline; margin-bottom: 2.5rem; }
+    .cd-block { display: flex; flex-direction: column; align-items: center; }
+    .cd-num { font-family: var(--font-display); font-size: 2.2rem; line-height: 1; }
+    .cd-lbl { font-size: 0.52rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 0.2rem; }
+    .cd-sep { font-family: var(--font-display); font-size: 1.5rem; color: var(--purple); padding-bottom: 0.9rem; }
+
+    /* ── MERCH PEEK THUMBNAILS ── */
+    .merch-peek-row { display: flex; gap: 0.75rem; margin: 1.25rem 0 2rem; }
+    .merch-peek {
+      width: 90px; height: 120px; border-radius: 6px; overflow: hidden;
+      position: relative; border: 1px solid rgba(255,255,255,0.08); cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .merch-peek:hover { transform: translateY(-4px); border-color: var(--green); }
+    .merch-peek img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85); }
+    .drop-badge {
+      position: absolute; bottom: 0.4rem; left: 0.4rem;
+      font-family: var(--font-heading); font-size: 0.48rem; letter-spacing: 0.12em;
+      text-transform: uppercase; background: var(--yellow); color: #000;
+      padding: 0.15rem 0.4rem; border-radius: 2px;
+    }
+    .merch-price {
+      position: absolute; top: 0.4rem; right: 0.4rem;
+      font-family: var(--font-heading); font-size: 0.55rem; letter-spacing: 0.08em;
+      color: var(--white); background: rgba(0,0,0,0.6); padding: 0.15rem 0.4rem; border-radius: 2px;
+    }
+
+    /* ── MUSIC LINKS ── */
+    .platform-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .platform-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--font-heading); font-size: 0.68rem; letter-spacing: 0.15em;
+      text-transform: uppercase; padding: 0.6rem 1.1rem; border-radius: 2px;
+      border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.7);
+      transition: all 0.2s;
+    }
+    .platform-btn:hover { border-color: var(--white); color: var(--white); background: rgba(255,255,255,0.05); }
+
+    /* ── ALBUM FEATURE ── */
+    .album-feature {
+      display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;
+    }
+    .album-cover-sm {
+      width: 80px; height: 80px; border-radius: 4px; overflow: hidden; flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .album-cover-sm img { width: 100%; height: 100%; object-fit: cover; }
+    .album-meta { }
+    .album-label { font-family: var(--font-heading); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.25rem; }
+    .album-name { font-family: var(--font-display); font-size: 1.1rem; line-height: 1.1; }
+    .album-date { font-family: var(--font-heading); font-size: 0.65rem; letter-spacing: 0.15em; color: var(--yellow); margin-top: 0.3rem; }
+
+    /* ── BOOKING FORM ── */
+    .booking-pill {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--font-heading); font-size: 0.62rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--yellow);
+      border: 1px solid rgba(255,225,53,0.3); padding: 0.35rem 0.9rem;
+      border-radius: 2px; margin-bottom: 1.5rem;
+    }
+    .book-form { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; max-width: 560px; margin-bottom: 1.25rem; }
+    .book-form input,
+    .book-form select,
+    .book-form textarea {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px; padding: 0.85rem 1rem; color: var(--white);
+      font-family: var(--font-body); font-size: 0.8rem;
+      transition: border-color 0.2s; outline: none; width: 100%;
+    }
+    .book-form input:focus, .book-form select:focus, .book-form textarea:focus {
+      border-color: rgba(155,48,255,0.5);
+    }
+    .book-form input::placeholder, .book-form select::placeholder { color: var(--muted); }
+    .book-form select option { background: #111; }
+    .book-form .full-width { grid-column: 1 / -1; }
+    .book-form textarea { resize: none; height: 80px; }
+    #book-success { display: none; font-family: var(--font-heading); font-size: 0.8rem; letter-spacing: 0.15em; color: var(--green); margin-top: 0.75rem; }
+
+    /* ── SCROLL INDICATOR ── */
+    .scroll-hint {
+      position: absolute; bottom: 2rem; right: 4rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      opacity: 0.35; z-index: 2;
+    }
+    .scroll-hint span { font-family: var(--font-heading); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; writing-mode: vertical-rl; }
+    .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--white), transparent); animation: scroll-drop 1.8s ease-in-out infinite; }
+    @keyframes scroll-drop { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
+
+    /* ── FLOATING PLAYER ── */
+    .player-float {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      z-index: 300; display: flex; align-items: center; gap: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: rgba(12,12,12,0.92); backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 50px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.7); min-width: 320px;
+    }
+    .player-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: blink 1.5s ease-in-out infinite; flex-shrink: 0; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .play-btn-float {
+      width: 34px; height: 34px; border-radius: 50%; border: none;
+      background: var(--purple); color: var(--white); font-size: 0.75rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .player-info { flex: 1; min-width: 0; }
+    .player-track-name { font-size: 0.76rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .player-sub { font-size: 0.62rem; color: var(--muted); margin-top: 0.1rem; }
+    .progress-bar { height: 2px; background: rgba(255,255,255,0.1); border-radius: 1px; margin-top: 0.4rem; }
+    .progress-fill { height: 100%; background: var(--purple); border-radius: 1px; width: 0%; transition: width 0.5s linear; }
+    audio { display: none; }
+
+    /* ── SECTION DOTS ── */
+    .section-dots {
+      position: fixed; right: 1.5rem; top: 50%; transform: translateY(-50%);
+      z-index: 200; display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.25); cursor: pointer; transition: all 0.25s; }
+    .dot.active { background: var(--white); transform: scale(1.5); }
+
+    /* ── SHOP DRAWER ── */
+    .shop-drawer {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 400;
+      background: rgba(10,10,10,0.97); backdrop-filter: blur(30px);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      transform: translateY(100%); transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+      max-height: 80vh; overflow-y: auto;
+      padding: 2.5rem 3rem 6rem;
+    }
+    .shop-drawer.open { transform: translateY(0); }
+    .drawer-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem;
+    }
+    .drawer-title { font-family: var(--font-display); font-size: 1.5rem; }
+    .drawer-close {
+      width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15);
+      background: none; color: var(--white); font-size: 1.1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+    }
+    .drawer-close:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
+    .drawer-overlay {
+      position: fixed; inset: 0; z-index: 399; background: rgba(0,0,0,0.5);
+      opacity: 0; pointer-events: none; transition: opacity 0.35s;
+    }
+    .drawer-overlay.open { opacity: 1; pointer-events: all; }
+
+    /* ── SHOPIFY WIDGET OVERRIDES ── */
+    .shopify-buy-wrap { width: 100%; }
+  </style>
+</head>
+<body>
+
+<audio id="bg-audio" preload="metadata"></audio>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">DJ HUEVO</div>
+  <ul class="nav-links">
+    <li><a href="#room-1">Home</a></li>
+    <li><a href="#room-2">Collection</a></li>
+    <li><a href="#room-3">Music</a></li>
+    <li><a href="#room-4">Book</a></li>
+  </ul>
+  <button class="nav-cta cta-btn cta-yellow" onclick="document.getElementById('room-4').scrollIntoView({behavior:'smooth'})">Book Now</button>
+</nav>
+
+<!-- SECTION DOTS -->
+<div class="section-dots">
+  <div class="dot active" onclick="document.getElementById('room-1').scrollIntoView({behavior:'smooth'})"></div>
+  <div class="dot" onclick="document.getElementById('room-2').scrollIntoView({behavior:'smooth'})"></div>
+  <div class="dot" onclick="document.getElementById('room-3').scrollIntoView({behavior:'smooth'})"></div>
+  <div class="dot" onclick="document.getElementById('room-4').scrollIntoView({behavior:'smooth'})"></div>
+</div>
+
+<!-- FLOATING PLAYER -->
+<div class="player-float">
+  <div class="player-dot"></div>
+  <button class="play-btn-float" id="play-btn"><span class="play-icon">▶</span></button>
+  <div class="player-info">
+    <div class="player-track-name" id="player-track">Tu Padre — DJ Huevo</div>
+    <div class="player-sub">Now Playing</div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  </div>
+</div>
+
+<!-- SHOP DRAWER OVERLAY -->
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+
+<!-- SHOP DRAWER -->
+<div class="shop-drawer" id="shop-drawer">
+  <div class="drawer-header">
+    <div class="drawer-title">THE <span class="accent-green">6009</span> COLLECTION</div>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="shopify-buy-wrap">
+    <div id="collection-component-1778036588622"></div>
+  </div>
+</div>
+
+<!-- ROOM 1 — HERO -->
+<section class="room room-1" id="room-1">
+  <div class="room-bg"></div>
+  <div class="room-content">
+    <div class="room-eyebrow">Est. San Juan, PR · Based in San Antonio</div>
+    <h1 class="room-title">DJ<br/><span class="accent-purple">HUEVO</span></h1>
+    <div class="hero-tags">
+      <span class="hero-tag" style="color:var(--green)">The Whole World</span>
+      <div class="hero-divider"></div>
+      <span class="hero-tag" style="color:var(--yellow)">Album Jun 2</span>
+    </div>
+    <div class="countdown-row">
+      <div class="cd-block"><span class="cd-num" id="cd-d">--</span><span class="cd-lbl">Days</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-block"><span class="cd-num" id="cd-h">--</span><span class="cd-lbl">Hrs</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-block"><span class="cd-num" id="cd-m">--</span><span class="cd-lbl">Min</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-block"><span class="cd-num" id="cd-s">--</span><span class="cd-lbl">Sec</span></div>
+    </div>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+      <a href="#room-2" class="cta-btn cta-green">Shop Collection <span class="arrow">→</span></a>
+      <a href="#room-3" class="cta-btn cta-white">Listen Now <span class="arrow">→</span></a>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<!-- ROOM 2 — MERCH / 6009 COLLECTION -->
+<section class="room room-2" id="room-2">
+  <div class="room-bg"></div>
+  <div class="room-content">
+    <div class="room-eyebrow">New Drop · Limited Run</div>
+    <h2 class="room-title" style="font-size:clamp(2.5rem,6vw,5rem)">THE<br/><span class="accent-green">6009</span><br/>COLLECTION</h2>
+    <div class="merch-peek-row">
+      <div class="merch-peek" onclick="openDrawer()">
+        <img src="images/merch-hoodie-black.jpg" alt="Black Hoodie" />
+        <div class="drop-badge">New</div>
+        <div class="merch-price">$60</div>
+      </div>
+      <div class="merch-peek" onclick="openDrawer()">
+        <img src="images/merch-hoodie-pink.jpg" alt="Pink Hoodie" />
+        <div class="drop-badge">New</div>
+        <div class="merch-price">$60</div>
+      </div>
+      <div class="merch-peek" onclick="openDrawer()">
+        <img src="images/merch-hoodie-white.jpg" alt="White Hoodie" />
+        <div class="drop-badge">New</div>
+        <div class="merch-price">$60</div>
+      </div>
+      <div class="merch-peek" onclick="openDrawer()">
+        <img src="images/merch-pants-black.jpg" alt="Black Pants" />
+        <div class="drop-badge">New</div>
+        <div class="merch-price">$60</div>
+      </div>
+      <div class="merch-peek" onclick="openDrawer()">
+        <img src="images/merch-pants-pink.jpg" alt="Pink Pants" />
+        <div class="drop-badge">New</div>
+        <div class="merch-price">$60</div>
+      </div>
+      <div class="merch-peek" onclick="openDrawer()">
+        <img src="images/merch-pants-white.jpg" alt="White Pants" />
+        <div class="drop-badge">New</div>
+        <div class="merch-price">$60</div>
+      </div>
+    </div>
+    <button class="cta-btn cta-green" onclick="openDrawer()">Shop Collection <span class="arrow">→</span></button>
+  </div>
+</section>
+
+<!-- ROOM 3 — MUSIC -->
+<section class="room room-3" id="room-3">
+  <div class="room-bg"></div>
+  <div class="room-content">
+    <div class="room-eyebrow">Latest Music</div>
+    <h2 class="room-title" style="font-size:clamp(2.5rem,6vw,5rem)">STREAM<br/><span class="accent-yellow">NOW</span></h2>
+    <div class="album-feature">
+      <div class="album-cover-sm"><img src="images/album-cover.jpg" alt="Vámonos de Aquí" /></div>
+      <div class="album-meta">
+        <div class="album-label">Upcoming Album</div>
+        <div class="album-name">Vámonos<br/>de Aquí</div>
+        <div class="album-date">June 2, 2026</div>
+      </div>
+    </div>
+    <div class="platform-row">
+      <a href="https://open.spotify.com/artist/1nTWI80tkOcM5kQyXSzasu" target="_blank" class="platform-btn">🎵 Spotify</a>
+      <a href="https://music.apple.com/us/artist/dj-huevo/1229824021" target="_blank" class="platform-btn">🍎 Apple Music</a>
+      <a href="https://music.youtube.com/channel/UCJrV6je1dMRMkDFnUoS1AIw" target="_blank" class="platform-btn">▶ YouTube Music</a>
+      <a href="https://www.instagram.com/djhuevot" target="_blank" class="platform-btn">📸 Instagram</a>
+    </div>
+    <a href="#room-4" class="cta-btn cta-yellow">Book a Show <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<!-- ROOM 4 — BOOKING -->
+<section class="room room-4" id="room-4">
+  <div class="room-bg"></div>
+  <div class="room-content">
+    <div class="room-eyebrow">Bookings</div>
+    <h2 class="room-title" style="font-size:clamp(2.5rem,6vw,5rem)">BOOK<br/><span class="accent-purple">HUEVO</span></h2>
+    <div class="booking-pill">$100 / hr minimum · All gear included</div>
+    <form class="book-form" id="book-form" novalidate>
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Email Address" required />
+      <input type="date" name="event-date" required />
+      <select name="event-type" required>
+        <option value="" disabled selected>Event Type</option>
+        <option>Private Party</option>
+        <option>Corporate Event</option>
+        <option>Club / Venue</option>
+        <option>Festival</option>
+        <option>Wedding</option>
+        <option>Other</option>
+      </select>
+      <input type="text" name="venue" placeholder="Venue / Location" />
+      <input type="text" name="budget" placeholder="Budget" />
+      <textarea name="message" class="full-width" placeholder="Additional notes..."></textarea>
+    </form>
+    <button class="cta-btn cta-purple" onclick="submitBooking()">Send Request <span class="arrow">→</span></button>
+    <div id="book-success">✓ Request sent — we'll be in touch shortly.</div>
+  </div>
+</section>
+
+<!-- SHOPIFY BUY BUTTON SDK -->
+<script type="text/javascript">
+(function () {
+  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+  if (window.ShopifyBuy) {
+    if (window.ShopifyBuy.UI) { ShopifyBuyInit(); } else { loadScript(); }
+  } else { loadScript(); }
+  function loadScript() {
+    var script = document.createElement('script');
+    script.async = true; script.src = scriptURL;
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+    script.onload = ShopifyBuyInit;
+  }
+  function ShopifyBuyInit() {
+    var client = ShopifyBuy.buildClient({
+      domain: '0rdbbc-mm.myshopify.com',
+      storefrontAccessToken: 'b0f8c60c5ada07279964f2404b433521',
+    });
+    ShopifyBuy.UI.onReady(client).then(function (ui) {
+      ui.createComponent('collection', {
+        id: '530465980635',
+        node: document.getElementById('collection-component-1778036588622'),
+        moneyFormat: '%24%7B%7Bamount%7D%7D',
+        options: {
+          "product": {
+            "styles": {
+              "product": {
+                "@media (min-width: 601px)": {
+                  "max-width": "calc(25% - 20px)",
+                  "margin-left": "20px",
+                  "margin-bottom": "50px",
+                  "width": "calc(25% - 20px)"
+                },
+                "img": { "height": "calc(100% - 15px)", "position": "absolute", "left": "0", "right": "0", "top": "0" },
+                "imgWrapper": { "padding-top": "calc(75% + 15px)", "position": "relative", "height": "0" }
+              }
+            },
+            "text": { "button": "Add to cart" }
+          },
+          "productSet": { "styles": { "products": { "@media (min-width: 601px)": { "margin-left": "-20px" } } } },
+          "modalProduct": {
+            "contents": { "img": false, "imgWithCarousel": true, "button": false, "buttonWithQuantity": true },
+            "styles": { "product": { "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0px", "margin-bottom": "0px" } } },
+            "text": { "button": "Add to cart" }
+          },
+          "option": {},
+          "cart": { "text": { "total": "Subtotal", "button": "Checkout" } },
+          "toggle": {}
+        }
+      });
+    });
+  }
+})();
+</script>
+
+<script>
+  /* ── COUNTDOWN ── */
+  const target = new Date('2026-06-02T00:00:00');
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    const diff = target - Date.now();
+    if(diff <= 0){ document.getElementById('cd-d').textContent = 'OUT'; return; }
+    document.getElementById('cd-d').textContent = pad(Math.floor(diff/86400000));
+    document.getElementById('cd-h').textContent = pad(Math.floor((diff%86400000)/3600000));
+    document.getElementById('cd-m').textContent = pad(Math.floor((diff%3600000)/60000));
+    document.getElementById('cd-s').textContent = pad(Math.floor((diff%60000)/1000));
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* ── AUDIO PLAYER ── */
+  const audio    = document.getElementById('bg-audio');
+  const playBtn  = document.getElementById('play-btn');
+  const fillEl   = document.getElementById('progress-fill');
+  const playlist = [
+    { title: 'Tu Padre — DJ Huevo',        src: 'audio/tu-padre.m4a' },
+    { title: 'Tu Padre 2 — DJ Huevo',      src: 'audio/Tu Padre 2.m4a' },
+    { title: 'Mueve Ese Culo — DJ Huevo',  src: 'audio/Mueve Ese Culo.m4a' },
+    { title: 'Dejemos La Atrás — DJ Huevo',src: 'audio/Dejemos La Atras.m4a' },
+    { title: 'Fuck the Club — DJ Huevo',   src: 'audio/Fuck the Club.m4a' },
+    { title: 'INCENTIVO — DJ Huevo',       src: 'audio/INCENTIVO.m4a' },
+    { title: 'Kim K V2 — DJ Huevo',        src: 'audio/Kim K V2.m4a' },
+  ];
+  let currentIndex = 0, playing = false;
+
+  function loadTrack(i){
+    audio.src = playlist[i].src;
+    document.getElementById('player-track').textContent = playlist[i].title;
+    audio.load();
+  }
+  playBtn.addEventListener('click', function(){
+    if(playing){ audio.pause(); playing = false; playBtn.querySelector('.play-icon').textContent = '▶'; }
+    else { audio.play().catch(()=>{}); playing = true; playBtn.querySelector('.play-icon').textContent = '⏸'; }
+  });
+  audio.addEventListener('timeupdate', function(){
+    if(!audio.duration) return;
+    fillEl.style.width = ((audio.currentTime / audio.duration) * 100) + '%';
+  });
+  audio.addEventListener('ended', function(){
+    currentIndex = (currentIndex + 1) % playlist.length;
+    loadTrack(currentIndex); audio.play().catch(()=>{});
+  });
+  loadTrack(0);
+
+  /* ── SHOP DRAWER ── */
+  function openDrawer(){
+    document.getElementById('shop-drawer').classList.add('open');
+    document.getElementById('drawer-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer(){
+    document.getElementById('shop-drawer').classList.remove('open');
+    document.getElementById('drawer-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  /* ── BOOKING FORM ── */
+  function submitBooking(){
+    const form = document.getElementById('book-form');
+    const data = Object.fromEntries(new FormData(form));
+    if(!data.name || !data.email){ form.reportValidity(); return; }
+    const subject = encodeURIComponent('Booking Request — DJ Huevo');
+    const body = encodeURIComponent(
+      'Name: '+data.name+'\nEmail: '+data.email+'\nDate: '+(data['event-date']||'')+
+      '\nType: '+(data['event-type']||'')+'\nVenue: '+(data.venue||'')+
+      '\nBudget: '+(data.budget||'')+'\n\nNotes:\n'+(data.message||'None')
+    );
+    window.location.href = 'mailto:booking@djhuevo.com?subject='+subject+'&body='+body;
+    document.getElementById('book-success').style.display = 'block';
+    form.reset();
+  }
+
+  /* ── DOT NAV ── */
+  const dots  = document.querySelectorAll('.dot');
+  const rooms = document.querySelectorAll('.room');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        dots.forEach(d => d.classList.remove('active'));
+        const idx = Array.from(rooms).indexOf(e.target);
+        if(dots[idx]) dots[idx].classList.add('active');
+      }
+    });
+  }, { threshold: 0.5 });
+  rooms.forEach(r => obs.observe(r));
+</script>
+</body>
+</html>
