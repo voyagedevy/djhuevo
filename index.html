@@ -3,105 +3,447 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Enter DJ Huevo's room-based merch store. Shop the 6009 Collection through an immersive San Antonio mansion experience." />
-  <title>DJ Huevo - 6009 House</title>
+
+  <!-- SEO -->
+  <title>DJ Huevo — San Antonio DJ | Book Now | After Party Privado Out June 2</title>
+  <meta name="description" content="DJ Huevo is San Antonio's DJ. Stream After Party Privado, shop the 6009 Collection, and book DJ Huevo for your next event. Full production setup. $100/hr minimum." />
+  <meta name="keywords" content="DJ Huevo, San Antonio DJ, book a DJ, Latin DJ, After Party Privado, 6009 Collection, DJ booking San Antonio, San Antonio nightlife, Texas DJ" />
+  <link rel="canonical" href="https://djhuevo.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://djhuevo.com/" />
+  <meta property="og:title" content="DJ Huevo — San Antonio's Sound" />
+  <meta property="og:description" content="Stream After Party Privado. Shop the 6009 Collection. Book DJ Huevo for your next event in San Antonio." />
+  <meta property="og:image" content="images/album-cover.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="DJ Huevo" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@djhuevot" />
+  <meta name="twitter:title" content="DJ Huevo — San Antonio's Sound" />
+  <meta name="twitter:description" content="Stream After Party Privado. Shop the 6009 Collection. Book DJ Huevo for your next event." />
+  <meta name="twitter:image" content="images/album-cover.jpg" />
+
+  <!-- Google Tag Manager — replace GTM-XXXXXXX -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+
+  <!-- GA4 — replace G-XXXXXXXX -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXX');
+  </script>
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body data-page="rooms" class="intro-active">
-  <div class="huevo-intro" id="huevo-intro" role="status" aria-live="polite" aria-label="Loading DJ Huevo 6009 House">
-    <div class="intro-confetti" aria-hidden="true">
-      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-    </div>
-    <div class="intro-egg">
-      <img src="images/dj-huevo-logo.svg" alt="DJ Huevo egg logo" />
-      <span></span>
-    </div>
-    <div class="intro-copy">
-      <p>6009 signal warming up</p>
-      <b>DJ Huevo</b>
-      <small>Cracking the room open...</small>
-    </div>
-  </div>
-  <header class="house-nav" aria-label="Store navigation">
-    <nav class="house-nav-left" aria-label="Primary">
-      <a href="#map">Rooms</a>
-      <button type="button" data-open-shop>Shop All</button>
-      <a href="booking.html">Book</a>
-      <a href="archive.html">Archive</a>
-    </nav>
-    <a class="house-brand" href="#map" aria-label="DJ Huevo 6009 House home">
-      <img src="images/dj-huevo-logo.svg" alt="" />
-      <span>DJ Huevo</span>
-    </a>
-    <button class="cart-link" type="button" data-open-shop>Cart ( <span data-cart-count>0</span> )</button>
-  </header>
+<body>
+  <!-- Custom cursor -->
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-orb" id="cursor-orb" aria-hidden="true"></div>
 
-  <main class="house-shell" id="mainContent">
-    <section class="house-view map-view is-active" id="map" data-view="map" aria-label="6009 House property map">
-      <div class="map-atmosphere" aria-hidden="true"></div>
-      <div class="map-sigil" aria-hidden="true">
-        <img src="images/dj-huevo-logo.svg" alt="" />
-        <span>Huevo</span>
-        <small>6009 / SA</small>
-      </div>
-      <div class="map-title">
-        <p>DJ Huevo presents</p>
-        <h1>6009<br>House</h1>
-        <span>San Antonio after-hours merch house. Album energy, stacked fits, and room-by-room drops.</span>
-      </div>
-      <div class="map-coordinate" aria-hidden="true">
-        <span>29.4241 N</span>
-        <span>98.4936 W</span>
-        <span>Tu Padre signal live</span>
-        <span>Vamonos de Aqui / Jun 2</span>
-      </div>
-      <div class="map-drop-note">
-        <b>6009 Collection</b>
-        <span>Hoodies + stacked pants / $60 each</span>
-      </div>
-      <aside class="map-music-panel" id="map-music-panel" aria-label="DJ Huevo music links"></aside>
-      <a class="map-booking-panel" id="map-booking-panel" href="booking.html" aria-label="Book DJ Huevo">
-        <span>Bookings</span>
-        <b>Book DJ Huevo</b>
-        <small>$100/hr minimum</small>
+  <!-- GTM noscript -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- ===================== NAV ===================== -->
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo" aria-label="DJ Huevo home">
+        <img src="images/dj-huevo-logo.svg" alt="DJ Huevo" class="nav-logo-img" />
+        <span class="nav-logo-text">DJ HUEVO</span>
       </a>
-      <div class="property-map" id="property-map" aria-label="Clickable mansion room map"></div>
-      <div class="map-legend" aria-label="Room color legend">
-        <span><i class="legend-green"></i> Fit Room</span>
-        <span><i class="legend-purple"></i> Afterhours</span>
-        <span><i class="legend-yellow"></i> Booth</span>
-        <span><i class="legend-red"></i> La Sala</span>
-        <span><i class="legend-warm"></i> Late Plate</span>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links" role="list">
+        <li><a href="#music" class="nav-link" data-track="navMusic">Music</a></li>
+        <li><a href="#merch" class="nav-link" data-track="navMerch">Merch</a></li>
+        <li><a href="#booking" class="nav-link" data-track="navBook">Book</a></li>
+        <li><a href="#about" class="nav-link" data-track="navAbout">About</a></li>
+        <li><a href="#booking" class="nav-link nav-cta" data-track="ctaBookClick">Book Now</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <section id="hero" class="section hero" aria-label="Hero">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="hero-glow hero-glow--green"></div>
+      <div class="hero-glow hero-glow--purple"></div>
+      <div class="hero-stars"></div>
+      <div class="hero-fog"></div>
+    </div>
+
+    <div class="hero-inner">
+      <div class="hero-content">
+        <span class="eyebrow">San Antonio · Live Events · Music</span>
+
+        <h1 class="hero-title">DJ <span class="c-green">HUEVO</span></h1>
+        <p class="hero-tagline">San Antonio's Sound.</p>
+        <p class="hero-sub">Performing across Texas and beyond. Full production. Every genre. Book the experience.</p>
+
+        <!-- Countdown -->
+        <div class="countdown" aria-label="Album release countdown">
+          <p class="countdown-label" id="countdown-label">After Party Privado — Album Drops In</p>
+          <div class="countdown-units" role="timer" aria-live="off">
+            <div class="countdown-unit">
+              <span class="countdown-num" id="cd-days">00</span>
+              <span class="countdown-unit-label">Days</span>
+            </div>
+            <span class="countdown-sep" aria-hidden="true">:</span>
+            <div class="countdown-unit">
+              <span class="countdown-num" id="cd-hours">00</span>
+              <span class="countdown-unit-label">Hours</span>
+            </div>
+            <span class="countdown-sep" aria-hidden="true">:</span>
+            <div class="countdown-unit">
+              <span class="countdown-num" id="cd-mins">00</span>
+              <span class="countdown-unit-label">Mins</span>
+            </div>
+            <span class="countdown-sep" aria-hidden="true">:</span>
+            <div class="countdown-unit">
+              <span class="countdown-num" id="cd-secs">00</span>
+              <span class="countdown-unit-label">Secs</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Audio player -->
+        <div class="audio-player" id="audio-player" aria-label="Music preview player">
+          <button class="audio-btn" id="audio-toggle" aria-label="Play Tu Padre by DJ Huevo">
+            <span class="audio-icon" id="audio-icon" aria-hidden="true">&#9654;</span>
+          </button>
+          <div class="audio-info">
+            <span class="audio-track" id="audio-track-name">Tu Padre</span>
+            <span class="audio-status" id="audio-status">Preview</span>
+          </div>
+          <div class="audio-bar" aria-hidden="true">
+            <div class="audio-progress" id="audio-progress"></div>
+          </div>
+        </div>
+        <audio id="audio-el" preload="none" aria-hidden="true"></audio>
+
+        <!-- CTAs -->
+        <div class="hero-ctas">
+          <a href="#music" class="btn btn-primary" data-track="ctaStreamClick">Stream Now</a>
+          <a href="#merch" class="btn btn-secondary" data-track="ctaMerchClick">Shop Merch</a>
+          <a href="#booking" class="btn btn-ghost" data-track="ctaBookClick">Book DJ Huevo</a>
+        </div>
       </div>
-      <div class="map-room-list" id="map-room-list" aria-label="Room shortcuts"></div>
-    </section>
 
-    <div id="room-views"></div>
-  </main>
-
-  <a class="archive-jump" href="archive.html" aria-label="Open original index archive">Original Index</a>
-  <button class="explore-link" type="button" data-enter-room="map">Explore</button>
-  <button class="house-mark" type="button" data-enter-room="map" aria-label="Return to 6009 House map">6009</button>
-  <audio id="bg-audio" preload="metadata"></audio>
-
-  <div class="drawer-overlay" id="drawer-overlay" hidden></div>
-  <aside class="shop-drawer" id="shop-drawer" aria-labelledby="drawer-title" aria-hidden="true">
-    <div class="drawer-header">
-      <h2 class="drawer-title" id="drawer-title">The <span>6009</span> Collection</h2>
-      <button class="drawer-close" id="drawer-close" type="button" aria-label="Close shop drawer">&times;</button>
+      <!-- Album art -->
+      <div class="hero-art" aria-hidden="true">
+        <img src="images/album-cover.jpg" alt="After Party Privado album cover — DJ Huevo" class="hero-album-art" />
+        <div class="hero-art-glow"></div>
+      </div>
     </div>
-    <div class="shopify-buy-wrap">
-      <div id="collection-component-1778036588622"></div>
-    </div>
-  </aside>
+  </section>
 
+  <!-- Listen bar -->
+  <div class="listen-bar" aria-label="Stream DJ Huevo on your platform">
+    <span class="listen-bar-label">Listen on your platform —</span>
+    <a href="https://open.spotify.com/artist/1nTWI80tkOcM5kQyXSzasu" class="listen-bar-link" target="_blank" rel="noopener noreferrer" data-track="spotifyClick" aria-label="Listen on Spotify">Spotify</a>
+    <a href="https://music.apple.com/us/artist/dj-huevo/1229824021" class="listen-bar-link" target="_blank" rel="noopener noreferrer" data-track="appleMusicClick" aria-label="Listen on Apple Music">Apple Music</a>
+    <a href="https://music.youtube.com/channel/UCJrV6je1dMRMkDFnUoS1AIw" class="listen-bar-link" target="_blank" rel="noopener noreferrer" data-track="youtubeMusicClick" aria-label="Listen on YouTube Music">YouTube Music</a>
+  </div>
+
+  <!-- ===================== MUSIC ===================== -->
+  <section id="music" class="section" aria-labelledby="music-heading">
+    <div class="container">
+      <span class="section-label">Stream</span>
+      <h2 id="music-heading" class="section-title">Listen Now</h2>
+      <p class="section-sub">San Antonio's sound, streaming everywhere. Catch the previews before the full album drops June 2nd — then hit play on everything at once.</p>
+
+      <div class="platforms">
+        <a href="https://open.spotify.com/artist/1nTWI80tkOcM5kQyXSzasu" class="platform-btn platform-spotify" target="_blank" rel="noopener noreferrer" data-track="spotifyClick" aria-label="Open DJ Huevo on Spotify">
+          <svg class="platform-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Spotify
+        </a>
+        <a href="https://music.apple.com/us/artist/dj-huevo/1229824021" class="platform-btn platform-apple" target="_blank" rel="noopener noreferrer" data-track="appleMusicClick" aria-label="Open DJ Huevo on Apple Music">
+          <svg class="platform-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          Apple Music
+        </a>
+        <a href="https://music.youtube.com/channel/UCJrV6je1dMRMkDFnUoS1AIw" class="platform-btn platform-youtube" target="_blank" rel="noopener noreferrer" data-track="youtubeMusicClick" aria-label="Open DJ Huevo on YouTube Music">
+          <svg class="platform-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772zM9.684 15.54V8.46L15.816 12l-6.132 3.54z"/></svg>
+          YouTube Music
+        </a>
+      </div>
+
+      <!-- Spotify embed -->
+      <div class="spotify-wrap">
+        <iframe
+          id="spotify-embed"
+          style="border-radius:12px"
+          src="https://open.spotify.com/embed/artist/1nTWI80tkOcM5kQyXSzasu?utm_source=generator&theme=0"
+          width="100%"
+          height="352"
+          frameborder="0"
+          allowfullscreen
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          title="DJ Huevo on Spotify"
+          aria-label="Spotify player for DJ Huevo"
+        ></iframe>
+      </div>
+
+      <p class="music-note">Full album <strong>After Party Privado</strong> drops everywhere on <strong>June 2, 2026</strong>. Follow on all platforms to be notified the moment it's live.</p>
+      <a href="https://open.spotify.com/artist/1nTWI80tkOcM5kQyXSzasu" class="btn btn-primary btn-center" target="_blank" rel="noopener noreferrer" data-track="ctaStreamClick">Stream Now on Spotify</a>
+    </div>
+  </section>
+
+  <!-- ===================== MERCH ===================== -->
+  <section id="merch" class="section section-alt" aria-labelledby="merch-heading">
+    <div class="container">
+      <span class="section-label">Limited Drop</span>
+      <h2 id="merch-heading" class="section-title">6009 Collection</h2>
+      <p class="section-sub">First drop drops June 2nd — same day as the album. Hoodies + stacked pants. $60 each. Limited units. Once they're gone, they're gone.</p>
+
+      <div class="merch-badge" aria-live="polite">
+        <span class="merch-badge-dot" aria-hidden="true"></span>
+        Drop goes live June 2, 2026 · Limited supply
+      </div>
+
+      <!-- Merch image grid -->
+      <div class="merch-grid" aria-label="6009 Collection preview">
+        <div class="merch-card">
+          <img src="images/merch-hoodie-white.jpg" alt="6009 Flame Hoodie in White — $60" class="merch-img" loading="lazy" />
+          <div class="merch-card-info">
+            <span class="merch-card-name">6009 Flame Hoodie</span>
+            <span class="merch-card-price">$60</span>
+          </div>
+        </div>
+        <div class="merch-card">
+          <img src="images/merch-hoodie-black.jpg" alt="6009 Flame Hoodie in Black — $60" class="merch-img" loading="lazy" />
+          <div class="merch-card-info">
+            <span class="merch-card-name">6009 Flame Hoodie</span>
+            <span class="merch-card-price">$60</span>
+          </div>
+        </div>
+        <div class="merch-card">
+          <img src="images/merch-hoodie-pink.jpg" alt="6009 Flame Hoodie in Pink — $60" class="merch-img" loading="lazy" />
+          <div class="merch-card-info">
+            <span class="merch-card-name">6009 Flame Hoodie</span>
+            <span class="merch-card-price">$60</span>
+          </div>
+        </div>
+        <div class="merch-card">
+          <img src="images/merch-pants-black.jpg" alt="6009 Stacked Pants in Black — $60" class="merch-img" loading="lazy" />
+          <div class="merch-card-info">
+            <span class="merch-card-name">6009 Stacked Pants</span>
+            <span class="merch-card-price">$60</span>
+          </div>
+        </div>
+        <div class="merch-card">
+          <img src="images/merch-pants-white.jpg" alt="6009 Stacked Pants in White — $60" class="merch-img" loading="lazy" />
+          <div class="merch-card-info">
+            <span class="merch-card-name">6009 Stacked Pants</span>
+            <span class="merch-card-price">$60</span>
+          </div>
+        </div>
+        <div class="merch-card">
+          <img src="images/merch-pants-pink.jpg" alt="6009 Stacked Pants in Pink — $60" class="merch-img" loading="lazy" />
+          <div class="merch-card-info">
+            <span class="merch-card-name">6009 Stacked Pants</span>
+            <span class="merch-card-price">$60</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shopify Buy Button embed -->
+      <div class="shopify-wrap" id="shopify-wrap">
+        <div id="collection-component-1778036588622" aria-label="Shop 6009 Collection"></div>
+      </div>
+
+      <p class="merch-note">Ships within 5–7 business days. Support the artist directly.</p>
+      <button class="btn btn-secondary btn-center" id="shop-cta" data-track="ctaMerchClick" type="button">Shop the 6009 Collection</button>
+    </div>
+  </section>
+
+  <!-- ===================== BOOKING ===================== -->
+  <section id="booking" class="section" aria-labelledby="booking-heading">
+    <div class="container container-narrow">
+      <span class="section-label">Book</span>
+      <h2 id="booking-heading" class="section-title">Book DJ Huevo</h2>
+      <p class="section-sub">Available for clubs, private events, festivals, corporate events, weddings, and more. Based in San Antonio, TX — will travel for the right event.</p>
+
+      <div class="booking-meta">
+        <div class="booking-meta-item">
+          <span class="booking-meta-label">Minimum Rate</span>
+          <span class="booking-meta-value">$100 / hr</span>
+        </div>
+        <div class="booking-meta-item">
+          <span class="booking-meta-label">Production</span>
+          <span class="booking-meta-value">Full setup included</span>
+        </div>
+        <div class="booking-meta-item">
+          <span class="booking-meta-label">Location</span>
+          <span class="booking-meta-value">San Antonio + Travel</span>
+        </div>
+      </div>
+
+      <form class="booking-form" id="booking-form" aria-label="Booking inquiry form" novalidate>
+        <div class="form-row form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="f-name">Name <span class="req" aria-hidden="true">*</span></label>
+            <input class="form-input" type="text" id="f-name" name="name" placeholder="Full name" required autocomplete="name" aria-required="true" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input class="form-input" type="email" id="f-email" name="email" placeholder="your@email.com" required autocomplete="email" aria-required="true" />
+          </div>
+        </div>
+        <div class="form-row form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="f-date">Event Date <span class="req" aria-hidden="true">*</span></label>
+            <input class="form-input" type="date" id="f-date" name="event_date" required aria-required="true" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-venue">Venue</label>
+            <input class="form-input" type="text" id="f-venue" name="venue" placeholder="Venue or location" autocomplete="off" />
+          </div>
+        </div>
+        <div class="form-row form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="f-type">Event Type <span class="req" aria-hidden="true">*</span></label>
+            <select class="form-input form-select" id="f-type" name="event_type" required aria-required="true">
+              <option value="" disabled selected>Select type</option>
+              <option value="club">Club Night</option>
+              <option value="private">Private Event</option>
+              <option value="festival">Festival</option>
+              <option value="corporate">Corporate</option>
+              <option value="wedding">Wedding</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-budget">Budget <span class="req" aria-hidden="true">*</span></label>
+            <select class="form-input form-select" id="f-budget" name="budget" required aria-required="true">
+              <option value="" disabled selected>Select range</option>
+              <option value="500-999">$500 – $999</option>
+              <option value="1000-2499">$1,000 – $2,499</option>
+              <option value="2500-4999">$2,500 – $4,999</option>
+              <option value="5000+">$5,000+</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-message">Tell us about your event</label>
+          <textarea class="form-input form-textarea" id="f-message" name="message" placeholder="Details, requests, questions..." rows="4"></textarea>
+        </div>
+        <!-- UTM hidden fields -->
+        <input type="hidden" name="utm_source" id="f-utm-source" />
+        <input type="hidden" name="utm_medium" id="f-utm-medium" />
+        <input type="hidden" name="utm_campaign" id="f-utm-campaign" />
+        <input type="hidden" name="utm_term" id="f-utm-term" />
+        <input type="hidden" name="utm_content" id="f-utm-content" />
+        <p class="form-note">Minimum $100/hr · Full production setup included · San Antonio, TX + travel</p>
+        <button type="submit" class="btn btn-primary btn-full" data-track="bookingSubmit">Send Booking Inquiry</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT / MEDIA ===================== -->
+  <section id="about" class="section section-alt" aria-labelledby="about-heading">
+    <div class="container">
+      <span class="section-label">The Artist</span>
+      <h2 id="about-heading" class="section-title">About DJ Huevo</h2>
+
+      <div class="about-layout">
+        <div class="about-text">
+          <p class="about-para">DJ Huevo is a San Antonio-based DJ and recording artist building his own sound at the intersection of Latin street energy and cinematic production. Full gear. Full command of the room. Every set is an experience.</p>
+          <p class="about-para">His debut album <strong>After Party Privado</strong> drops June 2, 2026 — a project built in San Antonio, made for everyone. Featuring tracks including Tu Padre, Mueve Ese Culo, INCENTIVO, and more.</p>
+          <p class="about-para">Available for clubs, private events, festivals, and brand activations across Texas and beyond. $100/hr minimum. Full production setup always included.</p>
+          <div class="about-ctas">
+            <a href="https://www.instagram.com/djhuevot/" class="btn btn-secondary" target="_blank" rel="noopener noreferrer" data-track="instagramClick">Instagram @djhuevot</a>
+            <a href="#booking" class="btn btn-primary" data-track="ctaBookClick">Book Now</a>
+          </div>
+        </div>
+        <div class="about-art">
+          <div class="about-art-frame">
+            <img src="images/album-cover.jpg" alt="DJ Huevo — After Party Privado album artwork" class="about-album" loading="lazy" />
+          </div>
+          <div class="about-tracks" aria-label="Album tracks">
+            <p class="about-tracks-label">After Party Privado — Tracklist Preview</p>
+            <ul class="track-list">
+              <li class="track-item"><span class="track-num">01</span><span class="track-name">Tu Padre</span></li>
+              <li class="track-item"><span class="track-num">02</span><span class="track-name">Tu Padre 2</span></li>
+              <li class="track-item"><span class="track-num">03</span><span class="track-name">Mueve Ese Culo</span></li>
+              <li class="track-item"><span class="track-num">04</span><span class="track-name">Dejemos La Atrás</span></li>
+              <li class="track-item"><span class="track-num">05</span><span class="track-name">Fuck the Club</span></li>
+              <li class="track-item"><span class="track-num">06</span><span class="track-name">INCENTIVO</span></li>
+              <li class="track-item"><span class="track-num">07</span><span class="track-name">Kim K V2</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EMAIL CAPTURE ===================== -->
+  <section id="email-capture" class="section section-email" aria-labelledby="email-heading">
+    <div class="container container-narrow">
+      <span class="section-label">Stay In</span>
+      <h2 id="email-heading" class="section-title">Don't Miss the Drop</h2>
+      <p class="section-sub">Get first access to the album release, merch drops, and San Antonio show announcements. No spam. Just the signal.</p>
+      <form class="email-form" id="email-form" aria-label="Email signup" novalidate>
+        <div class="email-row">
+          <input type="email" class="form-input email-input" name="email" id="ef-email" placeholder="your@email.com" required aria-label="Your email address" aria-required="true" autocomplete="email" />
+          <button type="submit" class="btn btn-primary" data-track="emailSignup" data-source="email-section">Get Updates</button>
+        </div>
+        <input type="hidden" name="utm_source" id="ef-utm-source" />
+        <input type="hidden" name="utm_medium" id="ef-utm-medium" />
+        <input type="hidden" name="utm_campaign" id="ef-utm-campaign" />
+        <p class="email-disclaimer">No spam. Unsubscribe anytime.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="images/dj-huevo-logo.svg" alt="DJ Huevo" class="footer-logo" />
+          <div>
+            <span class="footer-name">DJ HUEVO</span>
+            <span class="footer-location">San Antonio, TX</span>
+          </div>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="#music" class="footer-link">Music</a>
+          <a href="#merch" class="footer-link">Merch</a>
+          <a href="#booking" class="footer-link">Book</a>
+          <a href="#about" class="footer-link">About</a>
+        </nav>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/djhuevot/" class="footer-social" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
+          <a href="https://open.spotify.com/artist/1nTWI80tkOcM5kQyXSzasu" class="footer-social" target="_blank" rel="noopener noreferrer" aria-label="Spotify">Spotify</a>
+          <a href="https://music.apple.com/us/artist/dj-huevo/1229824021" class="footer-social" target="_blank" rel="noopener noreferrer" aria-label="Apple Music">Apple Music</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 DJ Huevo. All rights reserved.</p>
+        <p class="footer-credit">Site by <a href="https://blitztheaxis.com" class="footer-credit-link" target="_blank" rel="noopener noreferrer">Blitz The Axis</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Shopify Buy Button SDK -->
   <script src="https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js"></script>
-  <script src="store-data.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
