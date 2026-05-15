@@ -343,6 +343,54 @@ ul { list-style: none; }
   .nav-cta { text-align: center; }
 }
 
+/* ---- LED LIGHT BAR DIVIDER ---- */
+.led-bar {
+  position: relative;
+  width: 100%;
+  height: 1px;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 1;
+}
+.led-bar::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,0.04) 8%,
+    rgba(255,255,255,0.55) 35%,
+    rgba(255,255,255,0.85) 50%,
+    rgba(255,255,255,0.55) 65%,
+    rgba(255,255,255,0.04) 92%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 6px 1px rgba(255,255,255,0.35),
+    0 0 18px 3px rgba(255,255,255,0.12),
+    0 0 40px 6px rgba(200,240,220,0.07);
+  animation: led-pulse 4s ease-in-out infinite;
+}
+@keyframes led-pulse {
+  0%, 100% { opacity: 0.75; width: 65%; }
+  50%       { opacity: 1;    width: 72%; }
+}
+
+/* ---- CONFETTI ---- */
+.confetti-piece {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  pointer-events: none;
+  z-index: 99996;
+  border-radius: 1px;
+  will-change: transform, opacity;
+}
+
 /* ---- HERO ---- */
 .hero {
   min-height: 100vh;
@@ -834,6 +882,57 @@ ul { list-style: none; }
 }
 
 /* ---- BOOKING ---- */
+#booking {
+  position: relative;
+  overflow: hidden;
+}
+#booking::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('images/hero-cybertruck.jpg');
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
+  filter: brightness(0.18) saturate(0.6);
+  z-index: 0;
+  transform: scale(1.03);
+}
+#booking::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(7,15,9,0.55) 0%, transparent 25%, transparent 75%, rgba(7,15,9,0.7) 100%),
+    linear-gradient(90deg, rgba(7,15,9,0.4) 0%, transparent 50%, rgba(7,15,9,0.4) 100%);
+  z-index: 1;
+}
+#booking .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Cybertruck LED accent — top border of booking section */
+#booking .led-bar-top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,0.02) 5%,
+    rgba(255,255,255,0.7) 30%,
+    rgba(255,255,255,1) 50%,
+    rgba(255,255,255,0.7) 70%,
+    rgba(255,255,255,0.02) 95%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 8px 2px rgba(255,255,255,0.5),
+    0 0 24px 4px rgba(200,255,220,0.15);
+  z-index: 3;
+  animation: led-pulse 6s ease-in-out infinite;
+}
+
 .booking-meta {
   display: flex;
   gap: 16px;

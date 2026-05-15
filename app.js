@@ -106,6 +106,7 @@
         elMins.textContent  = '00';
         elSecs.textContent  = '00';
         if (label) label.textContent = 'After Party Privado — Out Now';
+        launchConfetti();
         return;
       }
 
@@ -498,6 +499,63 @@
       }
     }
     requestAnimationFrame(step);
+  }
+
+  /* ---- CONFETTI ---- */
+  var CONFETTI_COLORS = [
+    '#2ECC71', '#FDE047', '#ffffff', '#ff6b6b',
+    '#74b9ff', '#fd79a8', '#a29bfe', '#55efc4'
+  ];
+
+  function spawnConfettiPiece() {
+    var el = document.createElement('div');
+    el.className = 'confetti-piece';
+    var color = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
+    var x = Math.random() * window.innerWidth;
+    var size = 6 + Math.random() * 8;
+    var angle = Math.random() * 360;
+    var drift = (Math.random() - 0.5) * 200;
+    var duration = 1800 + Math.random() * 1400;
+    el.style.cssText = [
+      'left:' + x + 'px',
+      'top:-12px',
+      'width:' + size + 'px',
+      'height:' + (size * 0.45) + 'px',
+      'background:' + color,
+      'transform:rotate(' + angle + 'deg)',
+      'border-radius:' + (Math.random() > 0.5 ? '50%' : '1px')
+    ].join(';');
+    document.body.appendChild(el);
+
+    var start = null;
+    function step(ts) {
+      if (!start) start = ts;
+      var p = (ts - start) / duration;
+      if (p >= 1) { el.remove(); return; }
+      var ease = p < 0.5 ? 2 * p * p : -1 + (4 - 2 * p) * p;
+      var y = ease * (window.innerHeight + 40);
+      var rot = angle + p * 720 * (Math.random() > 0.5 ? 1 : -1);
+      var wave = Math.sin(p * Math.PI * 3) * drift * p;
+      el.style.transform = 'translate(' + wave + 'px,' + y + 'px) rotate(' + rot + 'deg)';
+      el.style.opacity = p < 0.8 ? '1' : String(1 - (p - 0.8) / 0.2);
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function launchConfetti() {
+    var total = 120;
+    for (var i = 0; i < total; i++) {
+      (function(delay) {
+        setTimeout(spawnConfettiPiece, delay);
+      })(i * 18);
+    }
+    // Second wave
+    setTimeout(function() {
+      for (var j = 0; j < 60; j++) {
+        setTimeout(spawnConfettiPiece, j * 22);
+      }
+    }, 800);
   }
 
   /* ---- INIT ---- */
